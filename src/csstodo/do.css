@@ -1,0 +1,400 @@
+/* General settings */
+body {
+	margin: 0;
+	padding: 0;
+	margin-top: 120px;
+	font-family: Arial, sans-serif;
+	background-color: #fff;
+	color: #000;
+}
+
+/* Heading (h1) */
+h1 {
+	text-align: center;
+	font-size: 2.5em;
+	color: #000;
+	margin-top: 100px;
+	margin-bottom: 20px;
+}
+a {
+	color: #242e31;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+/* Form container and form elements */
+.form-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input[type='text'] {
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #000;
+	font-size: 1em;
+	width: 300px;
+	background-color: #fff;
+	color: #000;
+}
+
+button[id='openDialogBtn'] {
+	padding: 10px 20px;
+	background-color: #000;
+	color: #fff;
+	border: none;
+	font-size: 1em;
+	cursor: pointer;
+}
+
+button[type='openDialogBtn']:hover {
+	background-color: #555;
+}
+#openDialogBtn {
+	display: block;
+	margin: 0 auto; /* Центрирует элемент по горизонтали */
+	margin-top: 40px;
+	padding: 10px 30px;
+	font-size: 20px;
+	cursor: pointer;
+}
+.plus-sign {
+	font-size: 30px;
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+header {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	height: 80px;
+	background: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+	display: flex;
+	padding: 5px 0;
+	align-items: center;
+	justify-content: space-between;
+}
+.header__nav {
+	position: absolute;
+	right: 36px;
+	display: block;
+}
+.header__menu {
+	display: flex;
+	position: relative;
+	z-index: 2;
+}
+.header__menu li {
+	list-style: none;
+	margin: 0px 0px 0px 36px;
+	color: #000;
+	font-size: 16px;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+/* Стили для активного пункта меню */
+nav ul li a.active {
+	font-weight: bold;
+	color: rgb(130, 89, 220);
+	pointer-events: none; /* чтобы сделать ссылку неактивной */
+}
+
+/* Эффект при наведении для остальных ссылок */
+nav ul li a:not(.active):hover {
+	color: #555;
+}
+/* Flexbox для карточек задач */
+#taskBoard {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+.task-column {
+	width: 30%;
+	border: 1px solid #ccc;
+	padding: 10px;
+}
+
+.task-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-height: 200px;
+	padding: 10px;
+	background-color: #f9f9f9;
+}
+
+.task-card {
+	padding: 10px;
+	border: 1px solid #000;
+	background-color: #fff;
+	cursor: grab;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.task-card button {
+	background-color: rgb(153, 32, 253);
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.task-card button:hover {
+	background-color: rgb(72, 13, 109);
+}
+
+/* Стиль для модального окна */
+dialog {
+	border: none;
+	padding: 20px;
+	border-radius: 8px;
+	width: 400px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	position: fixed;
+}
+
+/* Центрирование модального окна */
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.5); /* Затемненный фон */
+}
+
+/* Центрирование вручную */
+.dialog-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+#taskInput {
+	margin-top: 50px;
+	padding: 8px;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+label {
+	margin-top: 30px;
+	font-size: 30px;
+}
+
+/* Стиль кнопок в модальном окне */
+menu {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 20px;
+}
+
+button {
+	padding: 10px 16px;
+	font-size: 16px;
+	border: none;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+button:hover {
+	background-color: #333;
+}
+
+/* Затемнение фона */
+#overlay {
+	display: none; /* Скрыто по умолчанию */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 10;
+}
+
+/* Для телефонов (меньше 768px) */
+@media (max-width: 768px) {
+	.header__nav {
+		display: block;
+		position: absolute;
+		top: 55px;
+		left: 0;
+		background: rgb(245, 246, 246);
+		box-shadow: #ccc;
+		width: 100%;
+		box-shadow: 0 4px 2px -2px rgba(36, 36, 36, 0.37);
+		transition: all 0.4s ease;
+		left: -100%;
+	}
+	.header__menu {
+		display: block;
+	}
+	.header__nav.open-menu {
+		left: 0;
+	}
+	.header__menu li {
+		margin: 40px 0px 40px 33px;
+		font-size: 14px;
+	}
+	.menu-burger__header {
+		position: relative;
+		width: 40px;
+		height: 35px;
+		display: block;
+		margin-left: 10px;
+	}
+	.menu-burger__header span,
+	.menu-burger__header:after,
+	.menu-burger__header:before {
+		height: 3px;
+		width: 100%;
+		position: absolute;
+		background: #515758;
+		margin: 0 auto;
+	}
+	.menu-burger__header span {
+		top: 16px;
+	}
+	.menu-burger__header:after,
+	.menu-burger__header:before {
+		content: '';
+	}
+	.menu-burger__header:after {
+		bottom: 5px;
+	}
+	.menu-burger__header:before {
+		top: 5px;
+	}
+	.menu-burger__header.open-menu span {
+		opacity: 0;
+		transition: 0.5s;
+	}
+	.menu-burger__header.open-menu:before {
+		transform: rotate(38deg);
+		top: 16px;
+		transition: 0.4s;
+	}
+	.menu-burger__header.open-menu:after {
+		transform: rotate(-38deg);
+		bottom: 16px;
+		transition: 0.4s;
+	}
+
+	header {
+		height: 60px;
+	}
+
+	#taskContainer {
+		flex-direction: column;
+		padding: 10px;
+	}
+
+	.task-column {
+		margin-bottom: 20px;
+	}
+
+	button {
+		width: 80%;
+	}
+
+	h1 {
+		font-size: 24px;
+	}
+}
+
+/* Для планшетов (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+	header ul {
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 0 20px;
+	}
+
+	header ul li a {
+		font-size: 18px;
+	}
+
+	#taskContainer {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.task-column {
+		flex: 1 1 45%;
+		margin: 10px;
+	}
+
+	h1 {
+		font-size: 28px;
+	}
+}
+
+/* Для десктопов (больше 1024px) */
+@media (min-width: 1024px) {
+	#taskContainer {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.task-column {
+		flex: 1 1 30%;
+		margin: 10px;
+	}
+
+	h1 {
+		font-size: 32px;
+	}
+}
+/* Основной контент */
+main {
+	text-align: left;
+	padding: 0px;
+}
+
+/* Секция с заголовком, логотипом и описанием */
+.hero {
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.logo {
+	width: 100px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.hero h1 {
+	text-align: center;
+	font-size: 2.5rem;
+	margin-top: 0;
+	margin-left: 30px;
+}
+
+.hero p {
+	max-width: 100%;
+	font-size: 1.2rem;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.hero-image {
+	margin: 0 auto;
+	display: block;
+	max-width: 100%;
+	max-height: 500px;
+}

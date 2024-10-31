@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Добавить задачу</title>
+		<link rel="icon" href="checkbox.png" type="image/x-icon" />
+		<link rel="stylesheet" href="csstodo/do.css" />
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<li><a href="main.html" class="home-link">Главная</a></li>
+					<li><a href="proects.html" class="projects-link">Проекты</a></li>
+					<li><a href="do.html" class="tasks-link">Список задач</a></li>
+					<li><a href="about.html" class="about-link">О приложении</a></li>
+				</ul>
+			</nav>
+		</header>
+		<h1>Добавить задачу</h1>
+		<div class="form-container">
+			<form action="do.html" , method="get">
+				<label for="taskInput">Введите задачу:</label>
+				<input type="text" name="taskInput" placeholder="Выйти на пробежку" />
+				<button type="submit" name="add">Добавить</button>
+			</form>
+			<!-- Ссылка для возврата на главную страницу -->
+			<a href="do.html">Вернуться к списку задач</a>
+			<script src="bundle.js"></script>
+		</div>
+	</body>
+</html>
