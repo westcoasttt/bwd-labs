@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Список задач</title>
+		<link rel="icon" href="checkbox.png" type="image/x-icon" />
+		<link rel="stylesheet" href="csstodo/do.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<header class="header">
+			<div class="container header__container">
+				<div class="menu-burger__header">
+					<span></span>
+				</div>
+
+				<nav class="header__nav">
+					<ul class="menu header__menu">
+						<li><a href="main.html" class="menu__item">Главная</a></li>
+						<li><a href="proects.html" class="proects__item">Проекты</a></li>
+						<li>
+							<a href="do.html" class="do__item active">Список задач</a>
+						</li>
+						<li><a href="about.html" class="about__item">О приложении</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<main>
+			<h1>Список задач</h1>
+
+			<section id="taskBoard">
+				<div class="task-column">
+					<h2>Задачи</h2>
+					<div id="tasks" class="task-list"></div>
+				</div>
+				<div class="task-column">
+					<h2>В работе</h2>
+					<div id="inProgressTasks" class="task-list"></div>
+				</div>
+				<div class="task-column">
+					<h2>Выполненные</h2>
+					<div id="completedTasks" class="task-list"></div>
+				</div>
+			</section>
+
+			<!-- Модальное окно для добавления задачи -->
+			<dialog id="taskDialog">
+				<form id="taskForm">
+					<label for="taskInput">Введите задачу:</label>
+					<input
+						type="text"
+						id="taskInput"
+						placeholder="Выйти на пробежку"
+						required
+					/>
+					<menu>
+						<button type="submit">Добавить</button>
+						<button type="button" id="cancelBtn">Отменить</button>
+					</menu>
+				</form>
+			</dialog>
+
+			<div id="overlay" class="overlay"></div>
+		</main>
+		<button id="openDialogBtn">
+			<span class="plus-sign">+</span>Добавить задачу
+		</button>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="js/script.js"></script>
+		<script src="bundle.js"></script>
+	</body>
+</html>
