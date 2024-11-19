@@ -23,6 +23,15 @@ module.exports = {
 
 	plugins: [
 		new HtmlWebpackPlugin({
+			template: './src/main.html',
+
+			inject: true,
+
+			chunks: ['index'],
+
+			filename: 'index.html',
+		}),
+		new HtmlWebpackPlugin({
 			template: './src/do.html',
 
 			inject: true,
@@ -31,15 +40,7 @@ module.exports = {
 
 			filename: 'do.html',
 		}),
-		new HtmlWebpackPlugin({
-			template: './src/main.html',
 
-			inject: true,
-
-			chunks: ['index'],
-
-			filename: 'main.html',
-		}),
 		new HtmlWebpackPlugin({
 			template: './src/addtask.html',
 
