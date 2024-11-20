@@ -1,4 +1,4 @@
-// Элементы DOM
+// Элементы DOM для задач
 const openDialogBtn = document.getElementById('openDialogBtn')
 const taskDialog = document.getElementById('taskDialog')
 const overlay = document.getElementById('overlay')
@@ -8,7 +8,17 @@ const tasksColumn = document.getElementById('tasks')
 const inProgressColumn = document.getElementById('inProgressTasks')
 const completedColumn = document.getElementById('completedTasks')
 
-// Открытие модального окна
+// Элементы DOM для истории
+const showHistoryBtn = document.getElementById('show-history')
+const historyModal = document.getElementById('history-modal')
+const historyList = document.getElementById('history-list')
+const closeHistoryBtn = document.getElementById('close-history')
+const clearHistoryBtn = document.getElementById('clear-history')
+
+// Глобальная переменная для истории
+const globalHistory = JSON.parse(localStorage.getItem('history')) || []
+
+// Открытие модального окна для добавления задачи
 openDialogBtn.addEventListener('click', () => {
 	taskDialog.showModal()
 	overlay.style.display = 'block' // Включить затемнение
@@ -52,9 +62,12 @@ taskForm.addEventListener('submit', event => {
 
 		displayTasks(tasks) // Обновляем список задач на странице
 
+		// Логируем добавление задачи
+		logHistory(`Добавлена задача: "${newTask.name}"`)
+
 		taskInput.value = '' // Очищаем поле ввода
 		taskDialog.close()
-		overlay.style.display = 'none' // Убираем затемнение фона
+		overlay.style.display = 'none' // Убираем затемнение
 	} else {
 		alert('Введите задачу!')
 	}
@@ -89,9 +102,13 @@ function createTaskCard(task, index) {
 	deleteBtn.textContent = 'Удалить'
 	deleteBtn.addEventListener('click', () => {
 		const tasks = getTasksFromLocalStorage()
-		tasks.splice(index, 1) // Удаляем задачу по индексу
+		const deletedTask = tasks.splice(index, 1)[0] // Удаляем задачу по индексу и сохраняем её
+
 		saveTasksToLocalStorage(tasks)
 		displayTasks(tasks)
+
+		// Логируем удаление задачи, чтобы была возможность восстановления
+		logHistory(`Удалена задача: "${deletedTask.name}"`, deletedTask)
 	})
 
 	taskCard.appendChild(deleteBtn)
@@ -134,6 +151,11 @@ function handleDragEnd(event) {
 	column.addEventListener('drop', event => {
 		const tasks = getTasksFromLocalStorage()
 		const task = tasks[draggedTaskIndex]
+		const previousColumn = task.inProgress
+			? 'inProgress'
+			: task.completed
+			? 'completed'
+			: 'tasks'
 
 		// Определяем, в какую колонку перетащили задачу
 		if (column.id === 'tasks') {
@@ -149,18 +171,100 @@ function handleDragEnd(event) {
 
 		saveTasksToLocalStorage(tasks)
 		displayTasks(tasks) // Обновляем отображение
+
+		// Логируем перемещение задачи
+		logHistory(
+			`Задача "${task.name}" перемещена в колонку "${column.id.replace(
+				'Tasks',
+				''
+			)}"`
+		)
 	})
 })
 
-// Инициализация приложения
-document.addEventListener('DOMContentLoaded', () => {
+// Функции для работы с историей
+
+function logHistory(message, task = null) {
+	if (task) {
+		globalHistory.push({ message, task })
+	} else {
+		globalHistory.push({ message }) // Логируем сообщение без задачи
+	}
+	saveHistory() // Сохраняем историю в localStorage
+}
+
+function saveHistory() {
+	localStorage.setItem('history', JSON.stringify(globalHistory))
+}
+
+function showHistory() {
+	historyList.innerHTML = '' // Очищаем список истории
+
+	globalHistory.forEach(entry => {
+		const li = document.createElement('li')
+		li.textContent = entry.message
+
+		if (entry.task) {
+			const restoreButton = document.createElement('button')
+			restoreButton.textContent = 'Восстановить'
+			restoreButton.onclick = () => restoreTask(entry.task, entry) // Восстановление задачи
+			li.appendChild(restoreButton)
+		}
+
+		historyList.appendChild(li)
+	})
+
+	// Показываем модальное окно с историей
+	historyModal.style.display = 'block'
+	overlay.style.display = 'block' // Показываем затемнение
+}
+
+// Функция для восстановления задачи
+// Функция для восстановления задачи
+function restoreTask(task, entry) {
 	const tasks = getTasksFromLocalStorage()
+	tasks.push(task) // Восстанавливаем задачу
+	saveTasksToLocalStorage(tasks)
 	displayTasks(tasks)
-})
+
+	// Убираем запись о восстановленной задаче из истории
+	const historyIndex = globalHistory.indexOf(entry)
+	if (historyIndex > -1) {
+		globalHistory.splice(historyIndex, 1) // Удаляем запись о восстановленной задаче
+		saveHistory() // Обновляем историю
+	}
+
+	// Добавляем новую запись о восстановлении задачи
+	logHistory(`Задача "${task.name}" была восстановлена`)
+
+	// Обновляем отображение истории
+	showHistory()
+}
+
+// Очистка истории
+clearHistoryBtn.onclick = function () {
+	globalHistory.length = 0 // Очищаем историю
+	saveHistory() // Сохраняем пустую историю в localStorage
+	showHistory() // Обновляем отображение истории
+}
+
+// Закрытие модального окна истории
+closeHistoryBtn.onclick = function () {
+	historyModal.style.display = 'none'
+	overlay.style.display = 'none'
+}
+
+// Открытие модального окна истории
+showHistoryBtn.onclick = showHistory
 $(document).ready(function () {
 	$('.menu-burger__header').click(function () {
 		$('.menu-burger__header').toggleClass('open-menu')
 		$('.header__nav').toggleClass('open-menu')
 		$('body').toggleClass('fixed-page')
 	})
+})
+// Инициализация приложения
+document.addEventListener('DOMContentLoaded', () => {
+	const tasks = getTasksFromLocalStorage()
+	displayTasks(tasks)
 })

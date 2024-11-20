@@ -23,29 +23,30 @@ module.exports = {
 
 	plugins: [
 		new HtmlWebpackPlugin({
+			template: './src/index.html',
+
+			inject: true,
+
+			chunks: ['script'],
+
+			filename: 'index.html',
+		}),
+		new HtmlWebpackPlugin({
 			template: './src/do.html',
 
 			inject: true,
 
-			chunks: ['index'],
+			chunks: ['script'],
 
 			filename: 'do.html',
 		}),
-		new HtmlWebpackPlugin({
-			template: './src/main.html',
 
-			inject: true,
-
-			chunks: ['index'],
-
-			filename: 'main.html',
-		}),
 		new HtmlWebpackPlugin({
 			template: './src/addtask.html',
 
 			inject: true,
 
-			chunks: ['index'],
+			chunks: ['script'],
 
 			filename: 'addtask.html',
 		}),
@@ -54,7 +55,7 @@ module.exports = {
 
 			inject: true,
 
-			chunks: ['index'],
+			chunks: ['script'],
 
 			filename: 'about.html',
 		}),
@@ -63,7 +64,7 @@ module.exports = {
 
 			inject: true,
 
-			chunks: ['index'],
+			chunks: ['script'],
 
 			filename: 'proects.html',
 		}),

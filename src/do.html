@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Список задач</title>
-		<link rel="icon" href="checkbox.png" type="image/x-icon" />
-		<link rel="stylesheet" href="csstodo/do.css" />
+		<link
+			rel="icon"
+			href="https://img.freepik.com/free-photo/3d-render-tick-check-mark-isolated-icon-button_107791-15664.jpg?t=st=1732114713~exp=1732118313~hmac=d79b24b191f907c1aa0a3f5c5468996300ec9ae08e1fa931836f20061a932d8b&w=900"
+			type="image/x-icon"
+		/>
+		<link rel="stylesheet" href="csstodo/doo.css" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
 			rel="stylesheet"
@@ -20,7 +24,7 @@
 
 				<nav class="header__nav">
 					<ul class="menu header__menu">
-						<li><a href="main.html" class="menu__item">Главная</a></li>
+						<li><a href="index.html" class="menu__item">Главная</a></li>
 						<li><a href="proects.html" class="proects__item">Проекты</a></li>
 						<li>
 							<a href="do.html" class="do__item active">Список задач</a>
@@ -70,8 +74,18 @@
 		<button id="openDialogBtn">
 			<span class="plus-sign">+</span>Добавить задачу
 		</button>
+		<div id="history-modal" class="modal">
+			<div class="modal-content">
+				<h3>История изменений</h3>
+				<ul id="history-list"></ul>
+				<button id="clear-history">Очистить историю</button>
+				<button id="close-history">Закрыть</button>
+			</div>
+		</div>
+		<button id="show-history">История изменений</button>
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 		<script src="js/script.js"></script>
-		<script src="bundle.js"></script>
+		<script src="js/scr.js"></script>
+		<script src="/bundle.js"></script>
 	</body>
 </html>
