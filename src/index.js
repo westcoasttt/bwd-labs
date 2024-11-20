@@ -1,1 +1,3 @@
-import 'C:/4lab_web/bwd-labs/src/csstodo/do.css'
+import './csstodo/do.css'
+import './js/script.js'
+import './js/scr.js'
