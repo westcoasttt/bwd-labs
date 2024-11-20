@@ -27,20 +27,28 @@ module.exports = {
 
 			inject: true,
 
-			chunks: ['script'],
+			chunks: ['index'],
 
 			filename: 'index.html',
 		}),
 		new HtmlWebpackPlugin({
-			template: './src/do.html',
+			template: './src/index.html',
 
 			inject: true,
 
 			chunks: ['script'],
 
-			filename: 'do.html',
+			filename: 'index.html',
 		}),
+		new HtmlWebpackPlugin({
+			template: './src/main.html',
 
+			inject: true,
+
+			chunks: ['index'],
+
+			filename: 'main.html',
+		}),
 		new HtmlWebpackPlugin({
 			template: './src/addtask.html',
 
